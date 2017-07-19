@@ -82,7 +82,8 @@ class Processcontroller extends CI_Controller{
             $data = array(
                 "results" =>$objarr,
                 "role"=>"1",
-                "feedData"=>"processimport"
+                "feedData"=>"processimport",
+                "record_id"=>$record_id,
             );
             $this->load->view("process/importexisting",$data);
         }
@@ -109,5 +110,21 @@ class Processcontroller extends CI_Controller{
     function printoutfpc(){
         $file = "output/output.txt";
         file_put_contents($file,"Hello");
+    }
+    function updatedetails(){
+        $params = $this->input->post();
+        foreach($params["record"] as $record){
+            $sql = "insert into (record_id,tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita,filler) ";
+            $sql.= "values ";
+            $sql.= "('".$params["record_id"]."',";
+            $sql.= "'".$record["tipedetail"]."',";
+            $sql.= "'".$record["akun"]."',";
+            $sql.= "'".$record["matauang"]."',";
+            $sql.= "'".$record["jumlah"]."',";
+            $sql.= "'".$record["nama"]."',";
+            $sql.= "'".$record["nomorpelanggan"]."',";
+            $sql.= "'".$record["berita"]."',";
+            $sql.= "'".$record["filler"]."')";
+        }
     }
 }

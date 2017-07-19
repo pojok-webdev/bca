@@ -31,6 +31,7 @@
                                     </button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
+                                <input type="hidden" id="record_id" value="<?php echo $record_id;?>">
                                     <table class="table table-striped table-bordered" id="tProcess">
                                         <thead>
                                             <tr>
@@ -47,22 +48,22 @@
                                         <tbody>
                                             <?php foreach($results as $obj){?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $obj["id"];?></td>
-                                                <td><?php echo $obj["idr"];?></td>
-                                                <td><?php echo $obj["name"];?></td>
-                                                <td><?php echo $obj["kd1"];?></td>
-                                                <td><?php echo $obj["kd2"];?></td>
-                                                <td><?php echo $obj["kd3"];?></td>
-                                                <td><?php echo $obj["month"];?></td>
-                                                <td><?php echo $obj["year"];?></td>
+                                                <td class="data"><?php echo $obj["id"];?></td>
+                                                <td class="data"><?php echo $obj["idr"];?></td>
+                                                <td class="data"><?php echo $obj["name"];?></td>
+                                                <td class="data"><?php echo $obj["kd1"];?></td>
+                                                <td class="data"><?php echo $obj["kd2"];?></td>
+                                                <td class="data"><?php echo $obj["kd3"];?></td>
+                                                <td class="data"><?php echo $obj["month"];?></td>
+                                                <td class="data"><?php echo $obj["year"];?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>
                                                     <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
                                                     <ul class="dropdown-menu">
-                                                        <li><a href="../bimbelgroups/edit/<?php echo "test";?>">Edit</a></li>
+                                                        <li><a href="../recorddetails/edit/<?php echo "test";?>">Edit</a></li>
                                                         <li class="divider"></li>
-                                                        <li><a href="../bimbelgroups/remove/<?php echo "test";?>">Hapus</a></li>
+                                                        <li><a href="../recorddetails/remove/<?php echo "test";?>">Hapus</a></li>
                                                     </ul>
                                                 </div>
                                                 </td>
@@ -83,9 +84,27 @@
         <script type="text/javascript" src="/assets/vendors/datatables/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/assets/js/DT_bootstrap.js"></script>
         <script type="text/javascript">
-        console.log("Heoll");
+            console.log("Heoll");
+            record = [];
+            detail = [];
             $("#btnsavedata").click(function(){
-                window.location.href = "/processcontroller/save";
+                $("#tProcess tbody").each(function(){
+                    tr = $(this);
+                    tr.find("td.data").each(function(){
+                        td = $(this);
+                        detail.push(td.html());
+                        console.log("TD",td.html());
+                    });
+                    record.push(detail);
+                });
+                $.ajax({
+                    url:'/processcontroller/updatedetails',
+                    data:{
+                        record: record,
+                        record_id: 1
+                    },
+                    type:"post"
+                });
             });
             $("#btnoutput").click(function(){
                 console.log("btn output clicked");
