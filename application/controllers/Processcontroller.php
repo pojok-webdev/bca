@@ -62,18 +62,18 @@ class Processcontroller extends CI_Controller{
             while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
             {
                 $id = $filesop[0];
-    			$idr = $filesop[1];
-                $name = $filesop[2];
-    			$kd1 = $filesop[3];
-    			$kd2 = $filesop[4];
-    			$kd3 = $filesop[5];
-    			$month = $filesop[6];
-    			$year = $filesop[7];
+    			$nomorrekening = $filesop[1];
+                $matauang = $filesop[2];
+    			$nominal = $filesop[3];
+    			$nama = $filesop[4];
+    			$nomorkontrak = $filesop[5];
+    			$berita = $filesop[6];
+    			$filler = $filesop[7];
                 array_push($objarr,array(
-                    "id"=>$id,"idr"=>$idr,
-                    "name"=>$name,"kd1"=>$kd1,
-                    "kd2"=>$kd2,"kd3"=>$kd3,
-                    "month"=>$month,"year"=>$year,
+                    "id"=>$id,"nomorrekening"=>$nomorrekening,
+                    "matauang"=>$matauang,"nominal"=>$nominal,
+                    "nama"=>$nama,"nomorkontrak"=>$nomorkontrak,
+                    "berita"=>$berita,"filler"=>$filler,
                 )
                 );
                 $c = $c + 1;
@@ -113,6 +113,7 @@ class Processcontroller extends CI_Controller{
     }
     function updatedetails(){
         $params = $this->input->post();
+        $ci = & get_instance();
         foreach($params["record"] as $record){
             $sql = "insert into (record_id,tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita,filler) ";
             $sql.= "values ";
@@ -120,11 +121,13 @@ class Processcontroller extends CI_Controller{
             $sql.= "'".$record["tipedetail"]."',";
             $sql.= "'".$record["akun"]."',";
             $sql.= "'".$record["matauang"]."',";
-            $sql.= "'".$record["jumlah"]."',";
+            $sql.= "".$record["jumlah"].",";
             $sql.= "'".$record["nama"]."',";
             $sql.= "'".$record["nomorpelanggan"]."',";
             $sql.= "'".$record["berita"]."',";
             $sql.= "'".$record["filler"]."')";
+            $ci->db->query($sql);
         }
+        echo $ci->db->insert_id();
     }
 }

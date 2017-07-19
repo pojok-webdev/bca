@@ -36,26 +36,26 @@
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Jumlah</th>
-                                                <th>Nama</th>
-                                                <th>Kode 1</th>
-                                                <th>Kode 2</th>
-                                                <th>Kode 3</th>
-                                                <th>Bulan</th>
-                                                <th>Tahun</th>
+                                                <th>NO. Rekening</th>
+                                                <th>Mata Uang</th>
+                                                <th>Nominal</th>
+                                                <th>Nama Pelanggan</th>
+                                                <th>No. Kontrak</th>
+                                                <th>Berita</th>
+                                                <th>Filler</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($results as $obj){?>
                                             <tr class="odd gradeX">
                                                 <td class="data"><?php echo $obj["id"];?></td>
-                                                <td class="data"><?php echo $obj["idr"];?></td>
-                                                <td class="data"><?php echo $obj["name"];?></td>
-                                                <td class="data"><?php echo $obj["kd1"];?></td>
-                                                <td class="data"><?php echo $obj["kd2"];?></td>
-                                                <td class="data"><?php echo $obj["kd3"];?></td>
-                                                <td class="data"><?php echo $obj["month"];?></td>
-                                                <td class="data"><?php echo $obj["year"];?></td>
+                                                <td class="data"><?php echo $obj["nomorrekening"];?></td>
+                                                <td class="data"><?php echo $obj["matauang"];?></td>
+                                                <td class="data"><?php echo $obj["nominal"];?></td>
+                                                <td class="data"><?php echo $obj["nama"];?></td>
+                                                <td class="data"><?php echo $obj["nomorkontrak"];?></td>
+                                                <td class="data"><?php echo $obj["berita"];?></td>
+                                                <td class="data"><?php echo $obj["filler"];?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>
@@ -104,6 +104,12 @@
                         record_id: 1
                     },
                     type:"post"
+                })
+                .done(function(res){
+                    console.log("Sukses Import Existing",res);
+                })
+                .fail(function(err){
+                    console.log("Error Import Existing",err);
                 });
             });
             $("#btnoutput").click(function(){
