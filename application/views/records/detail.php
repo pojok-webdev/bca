@@ -24,9 +24,15 @@
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title"><?php echo $formtitle;?></div>
                                     <button class="xright btn btn-sm btn-default" id="addRecord"><i class="glyphicon glyphicon-plus"></i> Penambahan</button>
+                                    <form name="import" method="POST" enctype="multipart/form-data" action="/processcontroller/importexisting/<?php echo $record_id;?>">
+                                    <input class="btn btn-sm btn-default"  type="file" name="file">
+                                    <button class="btn btn-sm btn-default" id="import" type="submit" name="submit">
+                                        <i class="glyphicon glyphicon-import"></i> Import
+                                    </button>
+                                    </form>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
-                                    <table class="table table-striped table-bordered" id="tblDupsbgroup">
+                                    <table class="table table-striped table-bordered" id="tblrecorddetail">
                                         <thead>
                                             <tr>
                                                 <th>Kode Perusahaan</th>
@@ -77,7 +83,7 @@
         <script type="text/javascript" src="/assets/vendors/datatables/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/assets/js/DT_bootstrap.js"></script>
         <script type="text/javascript">
-            $('#tblDupsbgroup').dataTable( {
+            $('#tblrecorddetail').dataTable( {
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
                 "iDisplayLength": 5,

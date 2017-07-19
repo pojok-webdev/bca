@@ -26,7 +26,7 @@
                                     <button class="xright btn btn-sm btn-default" id="addRecord"><i class="glyphicon glyphicon-plus"></i> Penambahan</button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
-                                    <table class="table table-striped table-bordered" id="tblDupsbgroup">
+                                    <table class="table table-striped table-bordered" id="tblrecords">
                                         <thead>
                                             <tr>
                                                 <th>Kode Perusahaan</th>
@@ -77,7 +77,7 @@
         <script type="text/javascript" src="/assets/vendors/datatables/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/assets/js/DT_bootstrap.js"></script>
         <script type="text/javascript">
-            $('#tblDupsbgroup').dataTable( {
+            $('#tblrecords').dataTable( {
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
                 "iDisplayLength": 5,

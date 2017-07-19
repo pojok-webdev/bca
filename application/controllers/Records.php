@@ -33,6 +33,7 @@ class Records extends CI_Controller{
             "matauang"=>$this->Setting->getdata()->matauang,
             "kodeperusahaan"=>$this->Setting->getdata()->kodeperusahaan,
             "records"=>$this->Record->getrecords(),
+            "record_id" => $id,
             "role"=>$this->User->getrole()
         );
         $this->load->view("records/detail",$data);
