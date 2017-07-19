@@ -18,8 +18,6 @@
             <?php $this->load->view("commons/horizontalmenu");?>
                 <!-- content -->
                 <div class="col-md-10">
-
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
@@ -30,9 +28,33 @@
                                     <form class="form-horizontal" action="/settings/save" method="POST">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Tahun</label>
+                                                <label class="col-lg-4 control-label" for="focusedInput">Kode Perusahaan</label>
                                                 <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="focusedInput" name="currentyear" type="text" value="<?php echo $currentyear;?>" placeholder="Tahun">
+                                                    <input class="form-control typeahead" id="focusedInput" name="kodeperusahaan" type="text" value="<?php echo $data->kodeperusahaan;?>" placeholder="Kode Perusahaan">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="focusedInput">Mata Uang</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <input class="form-control typeahead" id="focusedInput" name="matauang" type="text" value="<?php echo $data->matauang;?>" placeholder="Mata Uang">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="focusedInput">Total Data</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <input class="form-control typeahead" id="focusedInput" name="totaldata" type="text" value="<?php echo $data->totaldata;?>" placeholder="Total Data">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="focusedInput">Total Data</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <input class="form-control typeahead" id="focusedInput" name="totalnominal" type="text" value="<?php echo $data->totalnominal;?>" placeholder="Total Nominal">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label" for="focusedInput">Tanggal Efektif Auto Debet</label>
+                                                <div class="col-lg-8" id="the-basics">
+                                                    <input class="form-control typeahead" id="focusedInput" name="tanggalefektifad" type="text" value="<?php echo $data->tanggalefektifad;?>" placeholder="Tanggal Efektif Autodebet">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
@@ -46,16 +68,13 @@
                 </div>
             </div>
         </div>
-
         <!-- footer -->
         <?php $this->load->view("commons/footer");?>
         <?php $this->load->view("commons/assets");?>
-
         <script type="text/javascript" src="/assets/js/autocomplete/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" src="/assets/js/autocomplete/jquery.autocomplete.js"></script>
         <script type="text/javascript">
                 var bts = [{"value":"170001-Ahmad Trianto (5c)","data":1},{"value":"170002-Irfan Hakim (5b)","data":2},{"value":"170003-Irwan Maulana (4d)","data":3}];
-
                 $('#focusedInput').autocomplete({
                     lookup: bts,
                     onSelect: function(suggestion) {

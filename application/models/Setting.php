@@ -15,4 +15,11 @@ class Setting extends CI_Model{
         $que = $ci->db->query($sql);
         return $que->result()[0]->currentyear;
     }
+    function getdata(){
+        $sql = "select id,kodeperusahaan,matauang,totaldata,";
+        $sql.= "totalnominal,tanggalefektifad,filler from settings ";
+        $que = $this->db->query($sql);
+        $res = $que->result();
+        return $res[0];
+    }
 }

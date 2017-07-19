@@ -5,20 +5,13 @@ class Settings extends CI_Controller{
         $this->load->model("Setting");
         $this->load->model("User");
     }
-    function getyear(){
-        session_start();
-        $sql = "select currentyear from settings ";
-        $que = $this->db->query($sql);
-        $res = $que->result();
-        return $res[0];
-    }
     function index(){
         session_start();
         $data = array(
             "breadcrumb" => array(1=>"App",2=>"Setting"),
             "formtitle"=>"Setting",
             "feedData"=>"settings",
-            "currentyear"=>$this->Setting->getcurrentyear(),
+            "data"=>$this->Setting->getdata(),
             "role"=>$this->User->getrole()
         );
         $this->load->view("commons/settings",$data);

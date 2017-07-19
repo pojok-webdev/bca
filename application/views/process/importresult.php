@@ -23,7 +23,11 @@
                             <div class="panel panel-default">
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title">Excel Import</div>
-                                    <button class="xright btn btn-sm btn-default" id="btnsavedata"><i class="glyphicon glyphicon-plus"></i> Simpan
+                                    <button class="xright btn btn-sm btn-default" id="btnsavedata">
+                                        <i class="glyphicon glyphicon-plus"></i> Simpan
+                                    </button>
+                                    <button class="xright btn btn-sm btn-default" id="btnoutput">
+                                        <i class="glyphicon glyphicon-plus"></i> Output
                                     </button>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
@@ -79,6 +83,8 @@
         <script type="text/javascript" src="/assets/vendors/datatables/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="/assets/js/DT_bootstrap.js"></script>
         <script type="text/javascript">
+        console.log("Heoll");
+            /*
             $('#tProcess').dataTable( {
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
@@ -96,9 +102,32 @@
                         '</select> records'
                     }
             } );
+            */
             $("#btnsavedata").click(function(){
                 window.location.href = "/processcontroller/save";
+            });
+            $("#btnoutput").click(function(){
+                console.log("btn output clicked");
+                $.ajax({
+                    url:'/processcontroller/print_out',
+                    data:{
+                        text:[
+                            ['D0001','IDR0009','Agus','001','002','004','Tes doang','NOV','2017'],
+                            ['D0002','IDR0009','Bambang','001','002','004','Tes doang','NOV','2017'],
+                            ['D0003','IDR0009','Yudi','001','002','004','Tes doang','NOV','2017'],
+                            ['D0004','IDR0009','Joko','001','002','004','Tes doang','NOV','2017']
+                        ]
+                    },
+                    type:'post'
+                })
+                .done(function(res){
+                    console.log("Res",res);
+                })
+                .fail(function(err){
+                    console.log("Err",err);
+                });
             });
         </script>
     </body>
 </html>
+
