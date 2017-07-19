@@ -60,7 +60,7 @@ class Main extends CI_Controller{
                 session_start();
                 $_SESSION["username"] = $login["username"];
                 $_SESSION["userid"] = $login["userid"];
-                redirect("../../cashier");
+                redirect("../../records");
             break;
             case "password tidak cocok":
                 $data = array(
