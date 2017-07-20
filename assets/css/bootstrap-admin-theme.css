@@ -36,7 +36,7 @@ body{
     padding-top: 70px; /* Required, because main menu / navbar has "navbar-fixed-top" class and is sticked to the top */
 }
 body.bootstrap-admin-with-small-navbar{
-    padding-top: 95px;
+    padding-top: 35px;
 }
 
 /** Main container **/
