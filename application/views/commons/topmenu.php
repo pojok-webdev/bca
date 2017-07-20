@@ -4,9 +4,7 @@
             <div class="col-lg-12">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left bootstrap-admin-theme-change-size">
-                        <li class="text">Change size:</li>
-                        <li><a class="size-changer small">Small</a></li>
-                        <li><a class="size-changer large active">Large</a></li>
+                        <li class="text">PadiNET</li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
