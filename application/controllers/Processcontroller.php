@@ -4,10 +4,10 @@ class Processcontroller extends CI_Controller{
         parent::__construct();
     }
     function index(){
-            $data = array(
-                "role"=>"1",
-                "feedData"=>"processimport"
-            );
+        $data = array(
+            "role"=>"1",
+            "feedData"=>"processimport"
+        );
         $this->load->view("importfile/index",$data);
     }
     function import(){
@@ -135,28 +135,35 @@ class Processcontroller extends CI_Controller{
         }
         echo $ci->db->insert_id();
     }
+    function cleandetails($record_id){
+        $sql = "delete from recorddetails where record_id=".$record_id;
+        $this->db->query($sql);
+        return ;
+    }
     function generatetext(){
         $this->load->helper("routines");
         $params = $this->input->post();
         $records = array();
         $queries = array();
+        $this->cleandetails($params["record_id"]);
         foreach($params as $key=>$val){
             $c = 0;
             if($key<>'download'){
                 $records = array();
                 $queries = array();
                 foreach($val as $r){
-                    $sql = "insert into recorddetails (tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita) ";
+                    $nominal = extractnum($params["nominal"][$c]);
+                    $sql = "insert into recorddetails (record_id,tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita) ";
                     $sql.= "values ";
-                    $sql.= "('".$params["id"][$c]."',";
+                    $sql.= "('".$params["record_id"]."',";
+                    $sql.= "'".$params["id"][$c]."',";
                     $sql.= "'".$params["nomorrekening"][$c]."',";
                     $sql.= "'".$params["matauang"][$c]."',";
-                    $sql.= "'".$params["nominal"][$c]."',";
+                    $sql.= "'".$nominal["intpart"].".".$nominal["fracpart"]."',";
                     $sql.= "'".$params["nama"][$c]."',";
                     $sql.= "'".$params["nomorkontrak"][$c]."',";
                     $sql.= "'".$params["berita"][$c]."')";
                     array_push($queries,$sql);
-                    $nominal = extractnum($params["nominal"][$c]);
                     array_push($records,
                         array(
                             $params["id"][$c],
@@ -186,5 +193,6 @@ class Processcontroller extends CI_Controller{
         echo $out;
         $file = "output/output.txt";
         file_put_contents($file,$out);
+        redirect("../../records/detail/".$params["record_id"]);
     }
 }

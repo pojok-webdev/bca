@@ -18,6 +18,7 @@
                 <?php $this->load->view("commons/horizontalmenu");?>
                 <!-- content -->
                 <form action="/Processcontroller/generatetext" method="post">
+                <input type="hidden" name="record_id" value="<?php echo $record_id;?>" />
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-lg-12">

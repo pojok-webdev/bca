@@ -23,48 +23,39 @@
                             <div class="panel panel-default">
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title"><?php echo $formtitle;?></div>
-                                    <button class="xright btn btn-sm btn-default" id="addRecord"><i class="glyphicon glyphicon-plus"></i> Penambahan</button>
+                                    
                                     <form name="import" method="POST" enctype="multipart/form-data" action="/processcontroller/importexisting/<?php echo $record_id;?>">
-                                    <input class="btn btn-sm btn-default"  type="file" name="file">
-                                    <button class="btn btn-sm btn-default" id="import" type="submit" name="submit">
-                                        <i class="glyphicon glyphicon-import"></i> Import
-                                    </button>
+                                        <input class="btn btn-sm btn-default"  type="file" name="file">
+                                        <button class="btn btn-sm btn-default" id="import" type="submit" name="submit">
+                                            <i class="glyphicon glyphicon-import"></i> Import
+                                        </button>
                                     </form>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
                                     <table class="table table-striped table-bordered" id="tblrecorddetail">
                                         <thead>
                                             <tr>
-                                                <th>Kode Perusahaan</th>
+                                                <th>Tipe Detail</th>
+                                                <th>Akun</th>
                                                 <th>Mata Uang</th>
-                                                <th>Total Data</th>
-                                                <th>Total Nominal</th>
-                                                <th>Tanggal Efektif</th>
+                                                <th>Jumlah</th>
+                                                <th>Nama</th>
+                                                <th>Nomor Pelanggan</th>
+                                                <th>Berita</th>
                                                 <th>Filler</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach($objs as $obj){?>
                                             <tr class="odd gradeX">
-                                                <td><?php echo $obj->kodeperusahaan;?></td>
+                                                <td><?php echo $obj->tipedetail;?></td>
+                                                <td><?php echo $obj->akun;?></td>
                                                 <td class="rightaligned number"><?php echo $obj->matauang;?></td>
-                                                <td><?php echo $obj->totaldata;?></td>
-                                                <td><?php echo $obj->totalnominal;?></td>
-                                                <td><?php echo $obj->tanggalefektifad;?></td>
+                                                <td><?php echo $obj->jumlah;?></td>
+                                                <td><?php echo $obj->nama;?></td>
+                                                <td><?php echo $obj->nomorpelanggan;?></td>
+                                                <td><?php echo $obj->berita;?></td>
                                                 <td><?php echo $obj->filler;?></td>
-                                                <td class="center">
-                                                <div class="btn-group">
-                                                    <button class="btn">Action</button>
-                                                    <button data-toggle="dropdown" class="btn dropdown-toggle"><span class="caret"></span></button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="../records/edit/<?php echo $obj->id;?>">Edit</a></li>
-                                                        <li><a href="../records/detail/<?php echo $obj->id;?>">Lihat Detail</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="../records/remove/<?php echo $obj->id;?>">Hapus</a></li>
-                                                    </ul>
-                                                </div>
-                                                </td>
                                             </tr>
                                             <?php }?>
                                         </tbody>
