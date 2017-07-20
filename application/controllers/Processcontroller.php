@@ -179,7 +179,9 @@ class Processcontroller extends CI_Controller{
                 }
             }
         }
+        $header = $this->getheader($params["record_id"]);
         $out = "";
+        $out.= $this->getheader($params["record_id"]);
         foreach($queries as $qry){
             $this->db->query($qry);
         }
@@ -194,5 +196,12 @@ class Processcontroller extends CI_Controller{
         $file = "output/output.txt";
         file_put_contents($file,$out);
         redirect("../../records/detail/".$params["record_id"]);
+    }
+    function getheader($record_id){
+        $sql = "select * from records where id=".$record_id;
+        $sql.= "";
+        $que = $this->db->query($sql);
+        $res = $que->result()[0];
+        return $res->hdr_rec_type.$res->hdr_data.$res->kodeperusahaan.$res->matauang.$res->totaldata.$res->totalnominal.$res->tanggalefektifad;
     }
 }
