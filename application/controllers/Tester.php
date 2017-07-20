@@ -3,6 +3,24 @@ class Tester extends CI_Controller{
     function __construct(){
         parent::__construct();
     }
+    function addspaces(){
+        $this->load->helper("routines");
+        echo addspaces("bebek",20) . "h";
+    }
+    function testsubstr(){
+        $str = "125,54,34";
+        $decfound = strpos($str,",");
+        if($decfound){
+            $intg = substr($str,0,$decfound);
+            $frac = substr($str,$decfound,strlen($str));
+        }else{
+            $intg = $str;
+            $frac = "00";
+        }
+
+
+        echo $intg . " and " . $frac . "<br />";
+    }
     function getterbilang(){
         $str = $this->uri->segment(3);
         $this->load->helper("currency");

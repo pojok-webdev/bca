@@ -17,18 +17,14 @@
                 <!-- left, vertical navbar -->
                 <?php $this->load->view("commons/horizontalmenu");?>
                 <!-- content -->
+                <form action="/Processcontroller/generatetext" method="post">
                 <div class="col-md-10">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default">
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title">Excel Import</div>
-                                    <button class="xright btn btn-sm btn-default" id="btnsavedata">
-                                        <i class="glyphicon glyphicon-plus"></i> Simpan
-                                    </button>
-                                    <button class="xright btn btn-sm btn-default" id="btnoutput">
-                                        <i class="glyphicon glyphicon-plus"></i> Output
-                                    </button>
+                                    <input type="submit" name="download" value="Download" class="btn"/>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
                                 <input type="hidden" id="record_id" value="<?php echo $record_id;?>">
@@ -48,14 +44,14 @@
                                         <tbody>
                                             <?php foreach($results as $obj){?>
                                             <tr class="odd gradeX">
-                                                <td class="data"><?php echo $obj["id"];?></td>
-                                                <td class="data"><?php echo $obj["nomorrekening"];?></td>
-                                                <td class="data"><?php echo $obj["matauang"];?></td>
-                                                <td class="data"><?php echo $obj["nominal"];?></td>
-                                                <td class="data"><?php echo $obj["nama"];?></td>
-                                                <td class="data"><?php echo $obj["nomorkontrak"];?></td>
-                                                <td class="data"><?php echo $obj["berita"];?></td>
-                                                <td class="data"><?php echo $obj["filler"];?></td>
+                                                <td class="data"><?php echo $obj["id"];?><input type="hidden" name="id[]" value="<?php echo $obj["id"];?>"></td>
+                                                <td class="data"><?php echo $obj["nomorrekening"];?><input type="hidden" name="nomorrekening[]" value="<?php echo $obj["nomorrekening"];?>"></td>
+                                                <td class="data"><?php echo $obj["matauang"];?><input type="hidden" name="matauang[]" value="<?php echo $obj["matauang"];?>"></td>
+                                                <td class="data"><?php echo $obj["nominal"];?><input type="hidden" name="nominal[]" value="<?php echo $obj["nominal"];?>"></td>
+                                                <td class="data"><?php echo $obj["nama"];?><input type="hidden" name="nama[]" value="<?php echo $obj["nama"];?>"></td>
+                                                <td class="data"><?php echo $obj["nomorkontrak"];?><input type="hidden" name="nomorkontrak[]" value="<?php echo $obj["nomorkontrak"];?>"></td>
+                                                <td class="data"><?php echo $obj["berita"];?><input type="hidden" name="berita[]" value="<?php echo $obj["berita"];?>"></td>
+                                                <td class="data"><?php echo $obj["filler"];?><input type="hidden" name="filler[]" value="<?php echo $obj["filler"];?>"></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>
@@ -76,6 +72,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
         <!-- footer -->

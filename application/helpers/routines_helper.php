@@ -1,8 +1,27 @@
 <?php
-$clear_tables = "delete from spp;delete from bimbel;delete from dupsb;alter table spp auto_increment=1;alter table bimbel auto_increment=1;alter table pembayaranbuku auto_increment=1;"; 
-$clear_tables = "delete from spp;";
-$clear_tables.= "delete from bimbel;"; 
-$clear_tables.= "delete from dupsb"; 
-$clear_tables.= "alter table spp auto_increment=1;"; 
-$clear_tables.= "alter table bimbel auto_increment=1;"; 
-$clear_tables.= "alter table pembayaranbuku auto_increment=1;"; 
+function addspaces($str,$prevlen=0,$postlen=40){
+    for($c=0;$c<$prevlen;$c++){
+        $str = " ".$str;
+    }
+    for($c = strlen($str);$c<$postlen;$c++){
+        $str.=" ";
+    }
+    return $str;
+}
+function add_trailing_zeros($num,$len){
+    for($c = strlen($num);$c<$len;$c++){
+        $num = "0".$num;
+    }
+    return $num;
+}
+function extractnum($num){
+    $decfound = strpos($num,",");
+    if($decfound){
+        $intg = substr($num,0,$decfound);
+        $frac = substr($num,$decfound+1,strlen($num));
+    }else{
+        $intg = $num;
+        $frac = "00";
+    }
+    return array("intpart"=>$intg,"fracpart"=>$frac);
+}

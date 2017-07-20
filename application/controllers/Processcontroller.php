@@ -61,6 +61,11 @@ class Processcontroller extends CI_Controller{
             $objarr = array();
             while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
             {
+                $decfound = strpos($filesop[3],",");
+                if($decfound){
+                    $intg = substr($filesop[3],0,$decfound[3]);
+                    $frac = substr($filesop[3],$decfound,strlen($filesop[3]));
+                }
                 $id = $filesop[0];
     			$nomorrekening = $filesop[1];
                 $matauang = $filesop[2];
@@ -129,5 +134,57 @@ class Processcontroller extends CI_Controller{
             $ci->db->query($sql);
         }
         echo $ci->db->insert_id();
+    }
+    function generatetext(){
+        $this->load->helper("routines");
+        $params = $this->input->post();
+        $records = array();
+        $queries = array();
+        foreach($params as $key=>$val){
+            $c = 0;
+            if($key<>'download'){
+                $records = array();
+                $queries = array();
+                foreach($val as $r){
+                    $sql = "insert into recorddetails (tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita) ";
+                    $sql.= "values ";
+                    $sql.= "('".$params["id"][$c]."',";
+                    $sql.= "'".$params["nomorrekening"][$c]."',";
+                    $sql.= "'".$params["matauang"][$c]."',";
+                    $sql.= "'".$params["nominal"][$c]."',";
+                    $sql.= "'".$params["nama"][$c]."',";
+                    $sql.= "'".$params["nomorkontrak"][$c]."',";
+                    $sql.= "'".$params["berita"][$c]."')";
+                    array_push($queries,$sql);
+                    $nominal = extractnum($params["nominal"][$c]);
+                    array_push($records,
+                        array(
+                            $params["id"][$c],
+                            add_trailing_zeros($params["nomorrekening"][$c],11),
+                            $params["matauang"][$c],
+                            add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],15),
+                            addspaces($params["nama"][$c],0,40),
+                            addspaces($params["nomorkontrak"][$c],3,15),
+                            addspaces($params["berita"][$c],0,18),
+                            $params["filler"][$c])
+                        );
+                    $c++;
+                }
+            }
+        }
+        $out = "";
+        foreach($queries as $qry){
+            $this->db->query($qry);
+        }
+        foreach($records as $record){
+            foreach($record as $field){
+                $out.= $field;
+            }
+            $out .= PHP_EOL;
+        }
+        echo "<a href='/'>Home</a><br />";
+        echo $out;
+        $file = "output/output.txt";
+        file_put_contents($file,$out);
     }
 }
