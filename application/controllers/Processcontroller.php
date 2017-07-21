@@ -2,6 +2,7 @@
 class Processcontroller extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->load->helper("routines");
     }
     function index(){
         $data = array(
@@ -95,8 +96,29 @@ class Processcontroller extends CI_Controller{
                 echo "anda harus memilih file terlebih dahulu ";
             }
         }else{
-            echo "download clicked";
+            $out = $this->getheader($record_id).PHP_EOL;
+            $out.= $this->getbody($record_id);
+            $file = "output/output.txt";
+            file_put_contents($file,$out);
+            redirect("../../../records/detail/".$record_id);
         }
+    }
+    function getbody($record_id){
+        $sql = "select * from recorddetails where record_id = " . $record_id;
+        $out = "";
+        $que = $this->db->query($sql);
+        foreach($que->result() as $row){
+            $nominal = extractnum($row->jumlah,".");
+            $out.= $row->tipedetail;
+            $out.= add_trailing_zeros($row->akun,11);
+            $out.= $row->matauang;
+            $out.= add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],15);
+            $out.= addspaces($row->nama,0,40);
+            $out.= addspaces($row->nomorpelanggan,3,15);
+            $out.= addspaces($row->berita,0,18);
+            $out.= PHP_EOL;
+        } 
+        return $out;
     }
     function print_out(){
         $params = $this->input->post();
@@ -146,7 +168,6 @@ class Processcontroller extends CI_Controller{
         return ;
     }
     function generatetext(){
-        $this->load->helper("routines");
         $params = $this->input->post();
         $records = array();
         $queries = array();
