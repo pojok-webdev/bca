@@ -56,6 +56,7 @@ class Processcontroller extends CI_Controller{
         if(isset($_POST["submit"]))
         {
             $file = $_FILES['file']['tmp_name'];
+            if($file){
             $handle = fopen($file, "r");
             $c = 0;
             $objarr = array();
@@ -90,7 +91,11 @@ class Processcontroller extends CI_Controller{
                 "feedData"=>"processimport",
                 "record_id"=>$record_id,
             );
-            $this->load->view("process/importexisting",$data);
+            $this->load->view("process/importexisting",$data);}else{
+                echo "anda harus memilih file terlebih dahulu ";
+            }
+        }else{
+            echo "download clicked";
         }
     }
     function print_out(){
@@ -181,7 +186,7 @@ class Processcontroller extends CI_Controller{
         }
         $header = $this->getheader($params["record_id"]);
         $out = "";
-        $out.= $this->getheader($params["record_id"]);
+        $out.= $this->getheader($params["record_id"]).PHP_EOL;
         foreach($queries as $qry){
             $this->db->query($qry);
         }
@@ -202,6 +207,14 @@ class Processcontroller extends CI_Controller{
         $sql.= "";
         $que = $this->db->query($sql);
         $res = $que->result()[0];
-        return $res->hdr_rec_type.$res->hdr_data.$res->kodeperusahaan.$res->matauang.$res->totaldata.$res->totalnominal.$res->tanggalefektifad;
+        $nominal = extractnum($res->totalnominal,".");
+        $out = $res->hdr_rec_type;
+        $out.= $res->hdr_data;
+        $out.= addspaces($res->kodeperusahaan,0,8);
+        $out.= $res->matauang;
+        $out.= add_trailing_zeros($res->totaldata,7);
+        $out.= add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],17);
+        $out.= $res->tanggalefektifad;
+        return $out;
     }
 }
