@@ -29,6 +29,9 @@
                                         <button class="btn btn-sm btn-default" id="import" type="submit" name="submit">
                                             <i class="glyphicon glyphicon-import"></i> Import
                                         </button>
+                                        <button class="btn btn-sm btn-default" id="import" type="submit" name="download">
+                                            <i class="glyphicon glyphicon-import"></i> Download
+                                        </button>
                                     </form>
                                 </div>
                                 <div class="bootstrap-admin-panel-content">
