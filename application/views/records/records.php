@@ -80,6 +80,7 @@
         <script type="text/javascript" src="/assets/js/DT_bootstrap.js"></script>
         <script type="text/javascript">
             $('#tblrecords').dataTable( {
+                "aaSorting":[[4,'desc']],
                 "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-6'i><'col-md-6'p>>",
                 "sPaginationType": "bootstrap",
                 "iDisplayLength": 5,
