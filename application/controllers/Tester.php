@@ -2,6 +2,7 @@
 class Tester extends CI_Controller{
     function __construct(){
         parent::__construct();
+        $this->load->helper("routines");
     }
     function addspaces(){
         $this->load->helper("routines");
@@ -17,8 +18,6 @@ class Tester extends CI_Controller{
             $intg = $str;
             $frac = "00";
         }
-
-
         echo $intg . " and " . $frac . "<br />";
     }
     function getterbilang(){
@@ -53,18 +52,6 @@ class Tester extends CI_Controller{
         $number = $this->uri->segment(3);
         echo removezero($number);
     }
-    function getmax(){
-        $nis = $this->uri->segment(3);
-        $this->load->model("Mcashier");
-        $remain = $this->Mcashier->getsppmaxyearmonth($nis);
-        echo $remain["maxyear"] . "<br />";
-        echo $remain["maxmonth"] . "<br />";
-    }
-    function getsppremain(){
-        $this->load->model("Mcashier");
-        $nis = $this->uri->segment(3);
-        echo $this->Mcashier->getsppremain($nis);
-    }
     function changepassword(){
         $COMMENT = "INTERFACE FOR CHANGE PASSWORD ";
         $COMMENT.= "http://albadar/tester/changepassword/2/puji";
@@ -76,13 +63,23 @@ class Tester extends CI_Controller{
             echo "tidak sukses";
         };
     }
-    function dupsbremain(){
-        $this->load->model("Mcashier");
-        echo "060477 -> " . $this->Mcashier->getdupsbremain("060477","2016").PHP_EOL;
-        echo "060412 -> " . $this->Mcashier->getdupsbremain("060412","2016").PHP_EOL;
-    }
-    function bookpaymentremain(){
-        $this->load->model("Mcashier");
-        echo $this->Mcashier->getbookpaymentremain("060477","2016").PHP_EOL;
+    function testheader(){
+        $record_id = $this->uri->segment(3);
+        $sql = "select a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad,";
+        $sql.= "count(b.id) totaldata,sum(b.jumlah) totalnominal from records a ";
+        $sql.= "left outer join recorddetails b on b.record_id = a.id ";
+        $sql.= "where a.id=".$record_id. " ";
+        $sql.= "group by a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad";
+        $que = $this->db->query($sql);
+        $res = $que->result()[0];
+        $nominal = extractnum($res->totalnominal,".");
+        $out = $res->hdr_rec_type;
+        $out.= $res->hdr_data;
+        $out.= addspaces($res->kodeperusahaan,0,8);
+        $out.= $res->matauang;
+        $out.= add_trailing_zeros($res->totaldata,7);
+        $out.= add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],17);
+        $out.= $res->tanggalefektifad;
+        echo $out;
     }
 }

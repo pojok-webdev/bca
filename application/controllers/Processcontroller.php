@@ -219,13 +219,16 @@ class Processcontroller extends CI_Controller{
         }
         echo "<a href='/'>Home</a><br />";
         echo $out;
-        $file = "output/output.txt";
+        $file = "output/ADBOFFL.txt";
         file_put_contents($file,$out);
         redirect("../../records/detail/".$params["record_id"]);
     }
     function getheader($record_id){
-        $sql = "select * from records where id=".$record_id;
-        $sql.= "";
+        $sql = "select a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad,";
+        $sql.= "count(b.id) totaldata,sum(b.jumlah) totalnominal from records a ";
+        $sql.= "left outer join recorddetails b on b.record_id = a.id ";
+        $sql.= "where a.id=".$record_id. " ";
+        $sql.= "group by a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad";
         $que = $this->db->query($sql);
         $res = $que->result()[0];
         $nominal = extractnum($res->totalnominal,".");
