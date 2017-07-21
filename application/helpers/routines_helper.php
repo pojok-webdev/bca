@@ -14,8 +14,8 @@ function add_trailing_zeros($num,$len){
     }
     return $num;
 }
-function extractnum($num){
-    $decfound = strpos($num,",");
+function extractnum($num,$separator = ","){
+    $decfound = strpos($num,$separator);
     if($decfound){
         $intg = substr($num,0,$decfound);
         $frac = substr($num,$decfound+1,strlen($num));
