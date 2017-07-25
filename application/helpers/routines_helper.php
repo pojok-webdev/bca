@@ -14,6 +14,12 @@ function add_trailing_zeros($num,$len){
     }
     return $num;
 }
+function add_end_zeros($num,$len){
+    for($c = strlen($num);$c<$len;$c++){
+        $num = $num."0";
+    }
+    return $num;
+}
 function extractnum($num,$separator = ","){
     $decfound = strpos($num,$separator);
     if($decfound){
