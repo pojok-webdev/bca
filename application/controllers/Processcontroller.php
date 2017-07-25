@@ -13,7 +13,6 @@ class Processcontroller extends CI_Controller{
     }
     function import(){
         session_start();
-        $_SESSION["username"] = "puji";
         $params = $this->input->post();
         if(isset($_POST["submit"]))
         {
@@ -51,7 +50,6 @@ class Processcontroller extends CI_Controller{
     }
     function importexisting(){
         session_start();
-        $_SESSION["username"] = "puji";
         $record_id = $this->uri->segment(3);
         $params = $this->input->post();
         if(isset($_POST["submit"]))
@@ -96,6 +94,7 @@ class Processcontroller extends CI_Controller{
                 echo "anda harus memilih file terlebih dahulu ";
             }
         }else{
+            $record_id = 1;
             $out = $this->getheader($record_id).PHP_EOL;
             $out.= $this->getbody($record_id);
             $file = "output/output.txt";
@@ -169,16 +168,18 @@ class Processcontroller extends CI_Controller{
     }
     function generatetext(){
         $params = $this->input->post();
+        $out = "";
+        $out.= $this->getheader($params["record_id"])."\r\n";
         $records = array();
         $queries = array();
         $this->cleandetails($params["record_id"]);
         foreach($params as $key=>$val){
             $c = 0;
-            if($key<>'download'){
+            if(($key<>'download')&&($key<>'record_id')){
                 $records = array();
                 $queries = array();
                 foreach($val as $r){
-                    $nominal = extractnum($params["nominal"][$c]);
+                    $nominal = extractnum($params["nominal"][$c],".");
                     $sql = "insert into recorddetails (record_id,tipedetail,akun,matauang,jumlah,nama,nomorpelanggan,berita) ";
                     $sql.= "values ";
                     $sql.= "('".$params["record_id"]."',";
@@ -195,7 +196,7 @@ class Processcontroller extends CI_Controller{
                             $params["id"][$c],
                             add_trailing_zeros($params["nomorrekening"][$c],11),
                             $params["matauang"][$c],
-                            add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],15),
+                            add_trailing_zeros($nominal["intpart"],13).add_end_zeros($nominal["fracpart"],2),
                             addspaces($params["nama"][$c],0,40),
                             addspaces($params["nomorkontrak"][$c],3,15),
                             addspaces($params["berita"][$c],0,18),
@@ -205,9 +206,6 @@ class Processcontroller extends CI_Controller{
                 }
             }
         }
-        $header = $this->getheader($params["record_id"]);
-        $out = "";
-        $out.= $this->getheader($params["record_id"]).PHP_EOL;
         foreach($queries as $qry){
             $this->db->query($qry);
         }
@@ -215,13 +213,15 @@ class Processcontroller extends CI_Controller{
             foreach($record as $field){
                 $out.= $field;
             }
-            $out .= PHP_EOL;
+            $out .= "\r\n";;
         }
         echo "<a href='/'>Home</a><br />";
-        echo $out;
         $file = "output/ADBOFFL.txt";
         file_put_contents($file,$out);
         redirect("../../records/detail/".$params["record_id"]);
+    }
+    function pgetheader($record_id){
+        return $this->getheader($record_id);
     }
     function getheader($record_id){
         $sql = "select a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad,";
@@ -237,7 +237,7 @@ class Processcontroller extends CI_Controller{
         $out.= addspaces($res->kodeperusahaan,0,8);
         $out.= $res->matauang;
         $out.= add_trailing_zeros($res->totaldata,7);
-        $out.= add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],17);
+        $out.= add_trailing_zeros($nominal["intpart"],15).add_end_zeros($nominal["fracpart"],17);
         $out.= $res->tanggalefektifad;
         return $out;
     }
