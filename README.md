@@ -1,18 +1,14 @@
-# Al Badar
+# BCA
 
-Al Badar is a web based application for academic administration. It has some features :
+Adalah sebuah program untuk menghasilkan file text dengan format yang dapat diolah oleh BCA.
 
-  - Records students database
-  - Records history of payments
-  - Print Reports of Payment
+  - membaca input dari file csv
+  - berbasis web
+  - menggunakan Apache2 dan PHP
+  - menggunakan database MySQL
 
+# Fitur
 
-License
-----
+  - Dapat menyimpan history
+  - Autentikasi user
 
-MIT
-
-
-**Free Software, Hell Yeah!**
-
-# bca
