@@ -24,8 +24,9 @@
                                 <div class="head panel-heading">
                                     <div class="text-muted bootstrap-admin-box-title"><?php echo $formtitle;?></div>
                                     
-                                    <form name="import" method="POST" enctype="multipart/form-data" action="/processcontroller/importexisting/<?php echo $record_id;?>">
+                                    <form name="import" method="POST" enctype="multipart/form-data" action="/processcontroller/importexisting">
                                         <input class="btn btn-sm btn-default"  type="file" name="file">
+                                        <input type="hidden" name="record_id" value="<?php echo $record_id;?>" />
                                         <button class="btn btn-sm btn-default" id="import" type="submit" name="submit">
                                             <i class="glyphicon glyphicon-import"></i> Import
                                         </button>

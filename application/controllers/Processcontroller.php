@@ -50,51 +50,65 @@ class Processcontroller extends CI_Controller{
     }
     function importexisting(){
         session_start();
-        $record_id = $this->uri->segment(3);
         $params = $this->input->post();
+        $record_id = $params["record_id"];
+        $record = $this->getrecord($record_id);
         if(isset($_POST["submit"]))
         {
             $file = $_FILES['file']['tmp_name'];
             if($file){
-            $handle = fopen($file, "r");
-            $c = 0;
-            $objarr = array();
-            while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
-            {
-                $decfound = strpos($filesop[3],",");
-                if($decfound){
-                    $intg = substr($filesop[3],0,$decfound[3]);
-                    $frac = substr($filesop[3],$decfound,strlen($filesop[3]));
+                $handle = fopen($file, "r");
+                $c = 0;
+                $objarr = array();
+                $total = 0;
+                while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                {
+                    $decfound = strpos($filesop[3],",");
+                    if($decfound){
+                        $intg = substr($filesop[3],0,$decfound[3]);
+                        $frac = substr($filesop[3],$decfound,strlen($filesop[3]));
+                    }
+                    $id = $filesop[0];
+                    $nomorrekening = $filesop[1];
+                    $matauang = $filesop[2];
+                    $nominal = $filesop[3];
+                    $nama = $filesop[4];
+                    $nomorkontrak = $filesop[5];
+                    $berita = $filesop[6];
+                    $filler = $filesop[7];
+                    array_push($objarr,array(
+                        "id"=>$id,"nomorrekening"=>$nomorrekening,
+                        "matauang"=>$matauang,"nominal"=>$nominal,
+                        "nama"=>$nama,"nomorkontrak"=>$nomorkontrak,
+                        "berita"=>$berita,"filler"=>$filler,
+                    )
+                    );
+                    $total+=$nominal;
+                    $c = $c + 1;
                 }
-                $id = $filesop[0];
-    			$nomorrekening = $filesop[1];
-                $matauang = $filesop[2];
-    			$nominal = $filesop[3];
-    			$nama = $filesop[4];
-    			$nomorkontrak = $filesop[5];
-    			$berita = $filesop[6];
-    			$filler = $filesop[7];
-                array_push($objarr,array(
-                    "id"=>$id,"nomorrekening"=>$nomorrekening,
-                    "matauang"=>$matauang,"nominal"=>$nominal,
-                    "nama"=>$nama,"nomorkontrak"=>$nomorkontrak,
-                    "berita"=>$berita,"filler"=>$filler,
-                )
+                $params = array(
+                    "kodeperusahaan"=>$record->kodeperusahaan,
+                    "matauang"=>$record->matauang,
+                    "totaldata"=>$c,
+                    "totalnominal"=>$total,
+                    "tanggalefektifad"=>$record->tanggalefektifad,
+                    "filler"=>$record->filler,
+                    "id"=>$record->id
                 );
-                $c = $c + 1;
-            }
-            $filesop = fgetcsv($handle, 1000, ",");
-            $data = array(
-                "results" =>$objarr,
-                "role"=>"1",
-                "feedData"=>"processimport",
-                "record_id"=>$record_id,
-            );
-            $this->load->view("process/importexisting",$data);}else{
+                $this->load->model("Record");
+                $this->Record->update($params);
+                $filesop = fgetcsv($handle, 1000, ",");
+                $data = array(
+                    "results" =>$objarr,
+                    "role"=>"1",
+                    "feedData"=>"processimport",
+                    "record_id"=>$record_id,
+                );
+                $this->load->view("process/importexisting",$data);
+            }else{
                 echo "anda harus memilih file terlebih dahulu ";
             }
         }else{
-            $record_id = 1;
             $out = $this->getheader($record_id).PHP_EOL;
             $out.= $this->getbody($record_id);
             $file = "output/output.txt";
@@ -222,6 +236,16 @@ class Processcontroller extends CI_Controller{
     }
     function pgetheader($record_id){
         return $this->getheader($record_id);
+    }
+    function getrecord($record_id){
+        $sql = "select a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad,";
+        $sql.= "a.filler,count(b.id) totaldata,sum(b.jumlah) totalnominal from records a ";
+        $sql.= "left outer join recorddetails b on b.record_id = a.id ";
+        $sql.= "where a.id=".$record_id. " ";
+        $sql.= "group by a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad";
+        $que = $this->db->query($sql);
+        $res = $que->result()[0];
+        return $res;
     }
     function getheader($record_id){
         $sql = "select a.id,a.hdr_rec_type,a.hdr_data,a.kodeperusahaan,a.matauang,a.tanggalefektifad,";

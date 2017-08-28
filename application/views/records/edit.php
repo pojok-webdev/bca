@@ -24,34 +24,37 @@
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
                                 <div class="panel-heading">
-                                    <div class="text-muted bootstrap-admin-box-title">Edit  Grup Dupsb</div>
+                                    <div class="text-muted bootstrap-admin-box-title">Edit  Record</div>
                                 </div>
                                 <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
-                                    <form class="form-horizontal" action="/dupsbgroups/update" method="POST">
+                                    <form class="form-horizontal" action="/records/update" method="POST">
+                                        <input type="hidden" name="totaldata" value="<?php echo $obj->totaldata;?>" />
+                                        <input type="hidden" name="totalnominal" value="<?php echo $obj->totalnominal;?>" />
+                                        <input type="hidden" name="filler" value="<?php echo $obj->filler;?>" />
+                                        <input type="hidden" name="id" value="<?php echo $obj->id;?>" />
                                         <fieldset>
-                                            <div class="form-group">
-                                                <input type="hidden" name="id" value="<?php echo $obj->id;?>" />
-                                                <label class="col-lg-4 control-label" for="focusedInput">Nama  Grup Dupsb</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="classname" name="name" type="text" value="<?php echo $obj->name;?>" placeholder="Nama Grup Dupsb">
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label" for="focusedInput">Kode Perusahaan</label>
+                                            <div class="col-lg-8" id="the-basics">
+                                                <input type="text" name="kodeperusahaan" value="<?php echo $obj->kodeperusahaan;?>" />
                                             </div>
-                                            <div class="form-group">
-                                                <input type="hidden" name="id" value="<?php echo $obj->id;?>" />
-                                                <label class="col-lg-4 control-label" for="focusedInput">Jumlah</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="classname" name="amount" type="text" value="<?php echo $obj->amount;?>" placeholder="Jumlah">
-                                                </div>
+                                        </div>
+                                        <div class="form-group has-warning">
+                                            <label class="col-lg-4 control-label" for="inputError">Mata Uang</label>
+                                            <div class="col-lg-8">
+                                                <label><?php echo $obj->matauang;?></label>
+                                                <input type="hidden" name="matauang" value="<?php echo $obj->matauang;?>" />
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Keterangan</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="classname" name="description" type="text" value="<?php echo $obj->description;?>" placeholder="Keterangan">
-                                                </div>
+                                        </div>
+                                        <div class="form-group has-success">
+                                            <label class="col-lg-4 control-label" for="selectError">Tanggal Efektif AutoDebet</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" id="inputWarning" name="tanggalefektifad" class="form-control" value="<?php echo $obj->tanggalefektifad;?>" placeholder="format: YYYYMMDD">
                                             </div>
-                                            <button type="submit" class="btn btn-primary" id="btnsave">Simpan Perubahan</button>
-                                            <button type="reset" class="btn btn-default">Batalkan</button>
-                                        </fieldset>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                        <button type="reset" class="btn btn-default">Batalkan</button>
+                                    </fieldset>
                                     </form>
                                 </div>
                             </div>

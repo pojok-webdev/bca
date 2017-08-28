@@ -34,12 +34,10 @@ class Record extends CI_Model{
         return $sql;
     }
     function save($params){
-        $sql = "insert into records (kodeperusahaan,matauang,totaldata,totalnominal,tanggalefektifad,filler) ";
+        $sql = "insert into records (kodeperusahaan,matauang,tanggalefektifad,filler) ";
         $sql.= "values ";
         $sql.= "('".$params['kodeperusahaan']."',";
         $sql.= "'".$params['matauang']."',";
-        $sql.= "'".$params['totaldata']."',";
-        $sql.= "'".$params['totalnominal']."',";
         $sql.= "'".$params['tanggalefektifad']."',";
         $sql.= "'".$params['filler']."') ";
         $ci = & get_instance();
@@ -47,7 +45,13 @@ class Record extends CI_Model{
         return $ci->db->insert_id();
     }
     function update($params){
-        $sql = "update records set kodeperusahaan= '".$params["kodeperusahaan"]."',matauang='".$params["matauang"]."',totaldata='".$params["totaldata"]."',totalnominal= '".$params["totalnominal"]."',tanggalefektif='".$params["tanggalefektif"]."',filler='".$params["filler"]."' ";
+        $sql = "update records set ";
+        $sql.= "kodeperusahaan= '".$params["kodeperusahaan"]."',";
+        $sql.= "matauang='".$params["matauang"]."',";
+        $sql.= "totaldata='".$params["totaldata"]."',";
+        $sql.= "totalnominal= '".$params["totalnominal"]."',";
+        $sql.= "tanggalefektifad='".$params["tanggalefektifad"]."',";
+        $sql.= "filler='".$params["filler"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
         $ci = & get_instance();

@@ -41,11 +41,12 @@ class Records extends CI_Controller{
     function edit(){
         session_start();
         checklogin();
+        $id = $this->uri->segment(3);
         $data = array(
             "breadcrumb" => array(1=>"Records",2=>"Edit"),
             "formtitle"=>"Edit Record",
             "feedData"=>"records",
-            "obj"=>$this->Record->getbimbelrecord($this->uri->segment(3)),
+            "obj"=>$this->Record->getrecord($this->uri->segment(3)),
             "role"=>$this->User->getrole()
         );
         $this->load->view("records/edit",$data);        
@@ -66,7 +67,7 @@ class Records extends CI_Controller{
         session_start();
         checklogin();
         $id = $this->uri->segment(3);
-        $this->Bimbelgroup->remove($id);
+        $this->Record->remove($id);
         redirect("../../");
     }
     function save(){

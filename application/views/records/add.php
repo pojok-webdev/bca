@@ -18,8 +18,6 @@
             <?php $this->load->view("commons/horizontalmenu");?>
                 <!-- content -->
                 <div class="col-md-10">
-
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
@@ -41,18 +39,6 @@
                                                 <div class="col-lg-8">
                                                     <label><?php echo $matauang;?></label>
                                                     <input type="hidden" name="matauang" value="<?php echo $matauang;?>" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Total Data</label>
-                                                <div class="col-lg-8">
-                                                    <input type="text" id="inputWarning" name="totaldata" class="form-control" value="" placeholder="contoh: 0001632">
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-warning">
-                                                <label class="col-lg-4 control-label" for="inputError">Total Nominal</label>
-                                                <div class="col-lg-8">
-                                                    <input type="text" id="inputWarning" name="totalnominal" class="form-control" value="" placeholder="contoh: 00000000864552400">
                                                 </div>
                                             </div>
                                             <div class="form-group has-success">
