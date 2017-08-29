@@ -8,10 +8,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">Reminders <i class="glyphicon glyphicon-bell"></i></a>
-                        </li>
-                        <li>
-                            <a href="#">Settings <i class="glyphicon glyphicon-cog"></i></a>
+                            <a href="/settings">Settings <i class="glyphicon glyphicon-cog"></i></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION["username"]?> <i class="caret"></i></a>
