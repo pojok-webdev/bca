@@ -5,7 +5,10 @@ class User extends CI_Model{
     }
     function changepassword($userid,$password){
         $pass = $this->createpassword($password);
-        $sql = "update users set salt='".$pass['salt']."',password='".$pass['password']."' where id='".$userid."'";
+        $sql = "update users set ";
+        $sql.= "salt='".$pass['salt']."',";
+        $sql.= "password='".$pass['password']."' ";
+        $sql.= "where id='".$userid."'";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return true;
@@ -15,18 +18,15 @@ class User extends CI_Model{
         $salted = $upassword.$salt;
         return array("salt"=>$salt,"password"=>hash("sha256",$salted));
     }
-    function getarray(){
-        return array("all"=>"Semua","puji"=>"Puji","risma"=>"Risma");
-    }
     function getUser($id){
-        $sql = "select a.id,a.nname,a.fname,a.mname,a.lname,a.password,a.email from users a ";
+        $sql = "select a.id,a.nname,a.password,a.email from users a ";
         $sql.= "where a.id=".$id;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result()[0];
     }
     function getUsers(){
-        $sql = "select a.id,a.nname,a.fname,a.mname,a.lname,a.password,a.email from users a " ;
+        $sql = "select a.id,a.nname,a.password,a.email from users a " ;
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $que->result();
@@ -55,20 +55,22 @@ class User extends CI_Model{
         return $sql;
     }
     function save($params){
-        $sql = "insert into users (nname,fname,mname,lname,email) ";
+        $upassword = $this->createpassword($params["password"]);
+        $sql = "insert into users (nname,email,password,salt,createuser) ";
         $sql.= "values ";
-        $sql.= "('".$params['nname']."',";
-        $sql.= "'".$params['fname']."',";
-        $sql.= "'".$params['mname']."',";
-        $sql.= "'".$params['lname']."',";
-        $sql.= "'".$params['email']."') ";
+        $sql.= "(";
+        $sql.= "'".$params['nname']."',";
+        $sql.= "'".$params['email']."',";
+        $sql.= "'".$upassword["password"]."',";
+        $sql.= "'".$upassword["salt"]."',";
+        $sql.= "'".$_SESSION["username"]."'";
+        $sql.= ") ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $ci->db->insert_id();
     }
     function update($params){
-        $sql = "update users set nname= '".$params["nname"]."',email='".$params["email"]."', ";
-        $sql.= "fname='".$params["fname"]."',mname='".$params["mname"]."',lname='".$params["lname"]."' ";
+        $sql = "update users set nname= '".$params["nname"]."',email='".$params["email"]."' ";
         $sql.= "where ";
         $sql.= "id='".$params['id']."' ";
         $ci = & get_instance();

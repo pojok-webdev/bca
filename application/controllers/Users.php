@@ -3,10 +3,6 @@ class Users extends CI_Controller{
     function __construct(){
         parent::__construct();
         $this->load->model("User");
-        $this->load->model("Grade");
-        $this->load->model("User");
-        $this->load->model("Sppgroup");
-        $this->load->model("Dupsbgroup");
         $this->load->library("Dates");
     }
     function changeuserpassword(){
@@ -24,9 +20,9 @@ class Users extends CI_Controller{
     function index(){
         session_start();
         $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Daftar"),
-            "formtitle"=>"Daftar Siswa",
-            "feedData"=>"siswa",
+            "breadcrumb" => array(1=>"User",2=>"Daftar"),
+            "formtitle"=>"Daftar User",
+            "feedData"=>"user",
             "objs"=>$this->User->getUsers(),
             "role"=>$this->User->getrole()
         );
@@ -35,12 +31,10 @@ class Users extends CI_Controller{
     function add(){
         session_start();
         $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Penambahan"),
-            "formtitle"=>"Penambahan Siswa",
-            "feedData"=>"siswa",
+            "breadcrumb" => array(1=>"User",2=>"Penambahan"),
+            "formtitle"=>"Penambahan User",
+            "feedData"=>"user",
             "Users"=>$this->User->getUsers(),
-            "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
             "role"=>$this->User->getrole()
         );
         $this->load->view("users/add",$data);        
@@ -48,13 +42,10 @@ class Users extends CI_Controller{
     function edit(){
         session_start();
         $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Edit"),
-            "formtitle"=>"Edit siswa",
-            "feedData"=>"siswa",
+            "breadcrumb" => array(1=>"User",2=>"Edit"),
+            "formtitle"=>"Edit User",
+            "feedData"=>"user",
             "obj"=>$this->User->getUser($this->uri->segment(3)),
-            "grades"=>$this->Grade->getclassarray(),
-            "sppgroups"=>$this->Sppgroup->getsppgrouparray(),
-            "dupsbgroups"=>$this->Dupsbgroup->getDupsbgrouparray(),
             "role"=>$this->User->getrole()
         );
         $this->load->view("users/edit",$data);        

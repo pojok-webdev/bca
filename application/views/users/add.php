@@ -39,22 +39,10 @@
                                                     <input type="text" id="email" name="email" class="form-control" value="">
                                                 </div>
                                             </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Nama Depan</label>
+                                            <div class="form-group has-warning">
+                                                <label class="col-lg-4 control-label" for="inputError">Password</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" id="fname" name="fname" class="form-control" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Nama Tengah</label>
-                                                <div class="col-lg-8">
-                                                    <input type="text" id="mname" name="mname" class="form-control" value="">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Nama Akhir</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input type="text" id="lname" name="lname" class="form-control" value="">
+                                                    <input type="password" id="password" name="password" class="form-control" value="">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

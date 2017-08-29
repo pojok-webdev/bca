@@ -18,8 +18,6 @@
             <?php $this->load->view("commons/horizontalmenu");?>
                 <!-- content -->
                 <div class="col-md-10">
-
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="panel panel-default bootstrap-admin-no-table-panel">
@@ -42,24 +40,6 @@
                                                     <input class="form-control" id="email" name="email" type="text" value="<?php echo $obj->email;?>" placeholder="Email">
                                                 </div>
                                             </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Nama Depan</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="fname" name="fname" type="text" value="<?php echo $obj->fname;?>" placeholder="Nama Depan">
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Nama Tengah</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="mname" name="mname" type="text" value="<?php echo $obj->mname;?>" placeholder="Nama Tengah">
-                                                </div>
-                                            </div>
-                                            <div class="form-group has-success">
-                                                <label class="col-lg-4 control-label" for="selectError">Nama Akhir</label>
-                                                <div class="col-lg-8">
-                                                    <input class="form-control" id="lname" name="lname" type="text" value="<?php echo $obj->lname;?>" placeholder="Nama Akhir">
-                                                </div>
-                                            </div>
                                             <button type="submit" class="btn btn-primary" id="btnsave">Simpan Perubahan</button>
                                             <button type="reset" class="btn btn-default">Batalkan</button>
                                         </fieldset>
@@ -71,7 +51,6 @@
                 </div>
             </div>
         </div>
-
         <!-- footer -->
         <?php $this->load->view("commons/footer");?>
         <?php $this->load->view("commons/assets");?>

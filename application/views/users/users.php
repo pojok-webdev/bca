@@ -33,9 +33,6 @@
                                             <tr>
                                                 <th width="15%">Nama</th>
                                                 <th>Email</th>
-                                                <th width="5%">Fname</th>
-                                                <th width="25%">Mname</th>
-                                                <th width="15%">Lname</th>
                                                 <th width="15%">Aksi</th>
                                             </tr>
                                         </thead>
@@ -44,9 +41,6 @@
                                             <tr class="odd gradeX">
                                                 <td><?php echo $obj->nname;?></td>
                                                 <td><?php echo $obj->email;?></td>
-                                                <td><?php echo $obj->fname;?></td>
-                                                <td><?php echo $obj->mname;?></td>
-                                                <td><?php echo $obj->lname;?></td>
                                                 <td class="center">
                                                 <div class="btn-group">
                                                     <button class="btn">Action</button>

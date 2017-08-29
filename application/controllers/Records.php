@@ -74,6 +74,9 @@ class Records extends CI_Controller{
         session_start();
         checklogin();
         $params = $this->input->post();
+        if(isset($params["batal"])){
+            redirect("/records");
+        }
         $this->Record->save($params);
         redirect("../index");
     }

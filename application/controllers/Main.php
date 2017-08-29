@@ -25,23 +25,18 @@ class Main extends CI_Controller{
             }
         }
         if(isset($params["cancel"])){
-            redirect("../../cashier");
+            redirect("../../records");
         }
     }
     function index(){
-        session_start();
-        $data = array(
-            "breadcrumb" => array(1=>"Siswa",2=>"Entri Nilai"),
-            "feedData"=>"evaluasi"
-        );
-        redirect("../cashier");
+        redirect("../records");
     }
     function info(){
         session_start();
         $data = array(
             "info1"=>"test",
             "info2"=>"Hi",
-            "redirect"=>"../../cashier"
+            "redirect"=>"../../records"
         );
         $this->load->view("info",$data);
     }

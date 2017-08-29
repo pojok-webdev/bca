@@ -48,7 +48,7 @@
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                            <button type="reset" class="btn btn-default">Batalkan</button>
+                                            <button type="reset" name="batal" class="btn btn-default">Batalkan</button>
                                         </fieldset>
                                     </form>
                                 </div>
