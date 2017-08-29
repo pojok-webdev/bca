@@ -12,4 +12,4 @@ Adalah sebuah program untuk menghasilkan file text dengan format yang dapat diol
   - Dapat menyimpan history
   - Autentikasi user
 
-author: puji@padi.net.id
+mailto: puji@padi.net.id
