@@ -39,26 +39,8 @@
                                                     <input class="form-control typeahead" id="focusedInput" name="matauang" type="text" value="<?php echo $data->matauang;?>" placeholder="Mata Uang">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Total Data</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="focusedInput" name="totaldata" type="text" value="<?php echo $data->totaldata;?>" placeholder="Total Data">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Total Data</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="focusedInput" name="totalnominal" type="text" value="<?php echo $data->totalnominal;?>" placeholder="Total Nominal">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label" for="focusedInput">Tanggal Efektif Auto Debet</label>
-                                                <div class="col-lg-8" id="the-basics">
-                                                    <input class="form-control typeahead" id="focusedInput" name="tanggalefektifad" type="text" value="<?php echo $data->tanggalefektifad;?>" placeholder="Tanggal Efektif Autodebet">
-                                                </div>
-                                            </div>
                                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                                            <button type="reset" class="btn btn-default">Batalkan</button>
+                                            <button type="reset" name="btncancel" class="btn btn-default">Batalkan</button>
                                         </fieldset>
                                     </form>
                                 </div>

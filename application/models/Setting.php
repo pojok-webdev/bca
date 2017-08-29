@@ -4,7 +4,7 @@ class Setting extends CI_Model{
         parent::__construct();
     }
     function update($params){
-        $sql = "update settings set currentyear= '".$params["currentyear"]."' ";
+        $sql = "update settings set kodeperusahaan= '".$params["kodeperusahaan"]."',matauang= '".$params["matauang"]."' ";
         $ci = & get_instance();
         $que = $ci->db->query($sql);
         return $sql;

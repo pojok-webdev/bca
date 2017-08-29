@@ -19,6 +19,9 @@ class Settings extends CI_Controller{
     function save(){
         session_start();
         $params = $this->input->post();
+        if(isset($params["btncancel"])){
+            redirect("/records");
+        }
         $this->Setting->update($params);
         redirect("../index");
     }
