@@ -109,7 +109,7 @@ class Processcontroller extends CI_Controller{
                 echo "anda harus memilih file terlebih dahulu ";
             }
         }else{
-            $out = $this->getheader($record_id).PHP_EOL;
+            $out = $this->getheader($record_id)."\r\n";
             $out.= $this->getbody($record_id);
             $file = "output/output.txt";
             file_put_contents($file,$out);
