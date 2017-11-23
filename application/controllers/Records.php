@@ -53,7 +53,7 @@ class Records extends CI_Controller{
     }
     function index(){
         session_start();
-        //checklogin();
+        checklogin();
         $data = array(
             "breadcrumb" => array(1=>"Records",2=>"Daftar"),
             "formtitle"=>"Records",

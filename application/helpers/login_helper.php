@@ -1,6 +1,6 @@
 <?php
     function checklogin(){
         if(!isset($_SESSION["username"])){
-            redirect("../../main/login");
+            redirect(base_url()."main/login");
         }
     }
