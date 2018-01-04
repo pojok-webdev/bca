@@ -127,7 +127,7 @@ class Processcontroller extends CI_Controller{
             $out.= $row->matauang;
             $out.= add_trailing_zeros($nominal["intpart"].$nominal["fracpart"],15);
             $out.= addspaces($row->nama,0,40);
-            $out.= addspaces($row->nomorpelanggan,3,15);
+            $out.= addspaces($row->nomorpelanggan,0,15);//they think this is for name
             $out.= addspaces($row->berita,0,18);
             $out.= PHP_EOL;
         } 
